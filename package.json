@@ -1,0 +1,22 @@
+{
+  "name": "environment",
+  "version": "1.0.0",
+  "description": "___        ______     ____ _                 _  ___           / \\ \\      / / ___|   / ___| | ___  _   _  __| |/ _ \\         / _ \\ \\ /\\ / /\\___ \\  | |   | |/ _ \\| | | |/ _` | (_) |       / ___ \\ V  V /  ___) | | |___| | (_) | |_| | (_| |\\__, |      /_/   \\_\\_/\\_/  |____/   \\____|_|\\___/ \\__,_|\\__,_|  /_/   -----------------------------------------------------------------",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "amazon-cognito-identity-js": "^6.3.7",
+    "aws-sdk": "^2.1545.0",
+    "body-parser": "^1.20.2",
+    "express": "^4.18.2",
+    "http": "^0.0.1-security",
+    "jsonwebtoken": "^9.0.2",
+    "jwk-to-pem": "^2.0.5",
+    "request": "^2.88.2"
+  }
+}
