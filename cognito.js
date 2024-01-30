@@ -19,7 +19,7 @@ const CognitoUserPool = AmazonCognitoId.CognitoUserPool;
 const userPool = new AmazonCognitoId.CognitoUserPool(poolData);
 
 //cognito 회원가입
-const signUp = (name, email, password) => {
+const signUp = (name, email, password, confirmpassword) => {
     return new Promise((result, reject) => {
         try {
             //사용자 속성리스트
@@ -27,17 +27,22 @@ const signUp = (name, email, password) => {
 
             //user 이름,이메일 설정
             attributeList.push(
+                new AmazonCognitoId.CognitoUserAttribute({
+                    Name: "email",
+                    Value: email
+                })
+            );          
+            attributeList.push(
                 new AmazonCognitoId.CognitoUserAttribute({ 
                     Name: "name", 
                     Value: name
                 })
             );
-            attributeList.push(
-                new AmazonCognitoId.CognitoUserAttribute({
-                    Name: "email",
-                    Value: email
-                })
-            );
+            
+            if(password !== confirmpassword) {
+              reject("Passwords do not match");
+              return;
+            };  
         
 
         //cognito에 새 user 등록.
