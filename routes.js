@@ -9,28 +9,31 @@ router.post('/signup', async (req,res)=> {
 
     //필요한 포멧 정의.
     //if (body.email&&body.user&&body.password){
-    let {email,user,password} = body;
+    let {email,name,password, confirmpassword} = body;
 
     try {
+
+      if (password !== confirmpassword) {
+        throw new Error("Passwords do not match");
+      }
       //cognito 모듈사용, 회원가입처리
-      let result = await cognito.signUp(user,email,password);
+      let result = await cognito.signUp(name,email,password, confirmpassword);
       //성공시 응답반환
       let response = {
+        name : name,
         username : result.user.username,
         id: result.userSub,
-        sucess: true
+        success: true
       }
       
       res.status(200).json({"result": response});
 
     } catch(err){
       //에러
+
       res.status(400).json({"error":err});
     }              
-/*
-    } else {
-        res.status(400).json({"error": "bad format"});
-    }*/                
+                
 });
 
 //이메일인증
