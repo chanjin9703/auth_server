@@ -8,7 +8,6 @@ router.post('/signup', async (req,res)=> {
     const {body} = req;
 
     //필요한 포멧 정의.
-    //if (body.email&&body.user&&body.password){
     let {email,name,password, confirmpassword} = body;
 
     try {
