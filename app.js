@@ -19,6 +19,7 @@ try {
   });
 
   app.use("/", routes); // /경로로들어오는요청 routes.js파일에 있는 경로로이동
+  
 } catch (err) {
   console.log("error", err);
 }
