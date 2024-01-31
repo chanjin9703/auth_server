@@ -1,7 +1,9 @@
 const http = require("http");
 const express = require("express");
 const bodyParser = require("body-parser");
+const dotenv = require("dotenv");
 
+require('dotenv').config();
 //경로 파일 
 const routes = require("./routes.js");
 

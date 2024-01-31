@@ -8,11 +8,12 @@ const jwkToPem = require("jwk-to-pem");
 const jwt = require("jsonwebtoken");
 const axios = require('axios');
 
-const cognitoTokenEndpoint = 'https://auth-server.auth.us-east-1.amazoncognito.com/oauth2/token';
+const userPoolId = process.env.userPoolId;
+const clientId = process.env.clientId;
 
 const poolData = {
-  UserPoolId: "us-east-1_aSlGxRnxZ",
-  ClientId: "kp7g1gla2vbr9j5bs2eu8ed1b"
+  UserPoolId: userPoolId,
+  ClientId: clientId
 };
 
 const aws_region = "us-east-1";
