@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-dep
+  namespace: auth
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: auth-deployment
+  template:
+    metadata:
+      labels:
+        app: auth-deployment
+    spec:
+      containers:
+      - name: auth-container
+        image: 109412806537.dkr.ecr.us-east-1.amazonaws.com/app_cognito_auth:latest
+        ports:
+        - containerPort: 4000
+
