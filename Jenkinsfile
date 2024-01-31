@@ -38,8 +38,8 @@ pipeline {
         
         stage('code build') {
 	   steps {
-	      sh "npm install'
-	      sh "node app.js'
+	      sh "npm install"
+	      sh "node app.js"
           }
 	}
 
