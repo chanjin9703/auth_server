@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true}));
 
 //서버 시작 port 4000, localhost
 try {
-  app.listen(4000, "0.0.0.0", () => {
+  app.listen(4000, () => {
     console.log("Server running");
   });
 
