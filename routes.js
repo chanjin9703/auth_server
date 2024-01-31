@@ -8,18 +8,14 @@ router.post('/signup', async (req,res)=> {
     const {body} = req;
 
     //필요한 포멧 정의.
-    let {email,name,password, confirmpassword} = body;
+    let {email,password} = body;
 
     try {
 
-      if (password !== confirmpassword) {
-        throw new Error("Passwords do not match");
-      }
       //cognito 모듈사용, 회원가입처리
-      let result = await cognito.signUp(name,email,password, confirmpassword);
+      let result = await cognito.signUp(email,password);
       //성공시 응답반환
       let response = {
-        name : name,
         username : result.user.username,
         id: result.userSub,
         success: true
