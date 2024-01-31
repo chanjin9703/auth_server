@@ -36,12 +36,6 @@ pipeline {
             }
         }
         
-        stage('code build') {
-	   steps {
-	      sh "npm install"
-	      sh "node app.js"
-          }
-	}
 
    
         stage('image build') {
