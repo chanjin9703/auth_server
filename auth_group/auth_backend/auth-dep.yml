@@ -15,7 +15,7 @@ spec:
       labels:
         app: auth-deployment
     spec:
-      serviceAccountName: cognito-backend-service-account
+      serviceAccountName: auth-backend-service-account
       containers:
       - name: auth-container
         image: 109412806537.dkr.ecr.us-east-1.amazonaws.com/app_cognito_auth:latest
