@@ -1,9 +1,7 @@
 pipeline {
     agent any
     
-    tools {
-	nodejs 'my_node'
-    }
+    
 
     environment {
     GITNAME = 'ks3ppp'            
