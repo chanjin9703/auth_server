@@ -96,6 +96,7 @@ const logIn = (name, password) => {
                         accesToken: result.getAccessToken().getJwtToken(),
                         idToken: result.getIdToken().getJwtToken(),
                         refreshToken: result.getRefreshToken().getToken(),
+			username : name
                     });
                 },
                 onFailure: err => {
