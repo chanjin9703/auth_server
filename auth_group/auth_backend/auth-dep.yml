@@ -1,12 +1,9 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: auth
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: auth-dep
+  labels:
+    app: auth-deployment
+  name: auth-deployment
   namespace: auth
 spec:
   replicas: 3
@@ -18,17 +15,16 @@ spec:
       labels:
         app: auth-deployment
     spec:
+      serviceAccountName: cognito-backend-service-account
       containers:
       - name: auth-container
         image: 109412806537.dkr.ecr.us-east-1.amazonaws.com/app_cognito_auth:latest
         ports:
         - containerPort: 4000
         env:
-        - name: TOKEN_ENDPOINT
-          value: "cognitoTokenEndpoint"
-        - name: USER_POOL_ID
-          value: "user-pool-id"
-        - name: CLIENT_ID
-          value: "client-id"
+        - name: userPoolId
+          value: "us-east-1_4kv4854BU"
+        - name: clientId
+          value: "62asu08r3nu7h2l79vkbhee41b"
         
 

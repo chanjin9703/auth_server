@@ -1,0 +1,18 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Federated": "arn:aws:iam::109412806537:oidc-provider/oidc.eks.us-east-1.amazonaws.com/id/33004A2A6C866323F8CF45D517294B7C"
+      },
+      "Action": "sts:AssumeRoleWithWebIdentity",
+      "Condition": {
+        "StringEquals": {
+          "oidc.eks.us-east-1.amazonaws.com/id/33004A2A6C866323F8CF45D517294B7C:aud": "sts.amazonaws.com",
+          "oidc.eks.us-east-1.amazonaws.com/id/33004A2A6C866323F8CF45D517294B7C:sub": "system:serviceaccount:auth:cognito-backend-service-account"
+        }
+      }
+    }
+  ]
+}

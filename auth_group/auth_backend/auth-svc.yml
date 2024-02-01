@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: auth-svc
+  name: auth-service
   namespace: auth
 spec:
   selector:
-    app: auth
+    app: auth-deployment
   ports:
     - protocol: TCP
       port: 80
