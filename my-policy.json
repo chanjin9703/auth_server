@@ -1,0 +1,18 @@
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Sid": "Statement1",
+			"Effect": "Allow",
+			"Action": [
+				"cognito-idp:AdminCreateUser",
+				"cognito-idp:AdminConfirmSignUp",
+				"cognito-idp:AdminInitiateAuth",
+				"cognito-idp:ChangePassword",
+				"cognito-idp:InitiateAuth",
+				"cognito-idp:AdminRespondToAuthChallenge"
+			],
+			"Resource": "arn:aws:cognito-idp:us-east-1:109412806537:userpool/us-east-1_4kv4854BU"
+		}
+	]
+}
