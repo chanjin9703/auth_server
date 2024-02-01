@@ -1,15 +1,13 @@
 pipeline {
     agent any
     
-    tools {
-	nodejs 'my_node'
-    }
+    
 
     environment {
     GITNAME = 'ks3ppp'            
     GITEMAIL = 'ks3ppp@gmail.com' 
     GITWEBADD = 'https://github.com/chanjin9703/auth_server.git'
-    GITSSHADD = 'git@github.com:chanjin9703/auth_server.git'
+    GITSSHADD = 'git@github.com:hjk1996/aws-app-eks-manifests.git'
     GITCREDENTIAL = 'kcj_git'
     
     ECR_REPO_URL = '109412806537.dkr.ecr.us-east-1.amazonaws.com/app_cognito_auth'
@@ -74,5 +72,33 @@ pipeline {
                 }
             }
         }
+	stage('k8s manifest file update') {
+      	   steps {
+        	git credentialsId: GITCREDENTIAL,
+            	url: GITSSHADD,
+            	branch: 'main'
+        
+       		 // 이미지 태그 변경 후 메인 브랜치에 푸시
+       		sh "git config --global user.email ${GITEMAIL}"
+        	sh "git config --global user.name ${GITNAME}"
+        	sh "sed -i 's@${ECR_REPO_URL}:.*@${ECR_REPO_URL}:${currentBuild.number}@g' ingress/auth_group/auth_backend/auth-dep.yml"
+        
+        	sh "git add ."
+        	sh "git commit -m 'fix:${ECR_REPO_URL} ${currentBuild.number} image versioning'"
+        	sh "git branch -M main"
+        	sh "git remote remove origin"
+        	sh "git remote add origin ${GITSSHADD}"
+        	sh "git push -u origin main"
+
+      	   }
+      	   post {
+        	failure {
+          	echo 'k8s manifest file update failure'
+        	}
+        	success {
+          	echo 'k8s manifest file update success'  
+        	}
+      	   }
+    	 }    
     }
 }
