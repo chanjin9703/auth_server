@@ -93,7 +93,7 @@ const logIn = (name, password) => {
             cognitoUser.authenticateUser(authenticationDetails, {
                 onSuccess: result => {
                     resolve({
-                        accesToken: result.getAccessToken().getJwtToken(),
+                        accessToken: result.getAccessToken().getJwtToken(),
                         idToken: result.getIdToken().getJwtToken(),
                         refreshToken: result.getRefreshToken().getToken(),
 			username : name
