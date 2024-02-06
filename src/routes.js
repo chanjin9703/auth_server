@@ -133,5 +133,36 @@ router.post('/changepwd', async (req,res)=> {
   }
 });
 
+router.post('/forgotpassword', async (req, res) => {
+  const { email } = req.body;
+
+  if (email) {
+    try {
+      await cognito.forgotPassword(email);
+      res.status(200).json({ message: '이메일로 인증코드가 발송되었습니다.'});
+    } catch (error) {
+      console.error('비밀번호 재설정 요청 실패:', error);
+      res.status(400).json({ error: '비밀번호 재설정 요청 실패.'});
+    }
+  } else {
+    res.status(400).json({ error: '이메일 주소를 입력하세요'});
+  }
+});
+
+router.post('/resetpassword', async (req, res) => {
+  const { email, code, newPassword} = req.body;
+
+  if (email && code && newPassword) {
+    try {
+      await cognito.resetPassword(email, code, newPassword);
+      res.status(200).json({ message: '비밀번호가 성공적으로 변경되었습니다.'});
+    } catch (error) {
+      console.error('비밀번호 재설정 실패:',error);
+      res.status(400).json({ error: '비밀번호 재설정 실패'});
+    }
+  } else {
+    res.status(400).json({ error: '이메일 주소, 인증코드 , new password를 입력하세요'});
+  }
+});
 
 module.exports = router;

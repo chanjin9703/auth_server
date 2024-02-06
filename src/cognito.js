@@ -191,6 +191,48 @@ const changePwd = (username, password, newpassword)=> {
     });
 };
 
+async function forgotPassword(email) {
+    const userData = {
+        Username: email,
+        Pool: userPool
+    };
+
+    const cognitoUser = new AmazonCognitoId.CognitoUser(userData);
+
+    return new Promise((resolve, reject) => {
+        cognitoUser.forgotPassword({
+            onSuccess: () => {
+                resolve();
+            },
+            onFailure: (error) => {
+                reject(error);
+            },
+        });
+    });
+}
+
+async function resetPassword(email, code, newPassword) {
+    const userData = {
+        Username: email,
+        Pool: userPool
+    };
+
+    const cognitoUser = new AmazonCognitoId.CognitoUser(userData);
+
+    return new Promise((resolve, reject) => {
+        cognitoUser.confirmPassword(code, newPassword, {
+            onSuccess: () => {
+                resolve();
+            },
+            onFailure: (error) => {
+                reject(error);
+            }
+        });
+    });
+}
+
+module.exports.resetPassword = resetPassword;
+module.exports.forgotPassword = forgotPassword;
 module.exports.logout = logout;
 module.exports.refreshTokens = refreshTokens;
 module.exports.changePwd = changePwd;
